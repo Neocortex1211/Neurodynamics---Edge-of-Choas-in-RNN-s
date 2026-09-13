@@ -1,0 +1,1 @@
+# Neurodynamics---Edge-of-Choas-in-RNN-s
