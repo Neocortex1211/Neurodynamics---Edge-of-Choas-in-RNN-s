@@ -54,12 +54,32 @@ walkthrough of exactly why this specific setup was chosen.
    spreading measures used for Random Boolean Networks in the criticality literature.
 
 
-### Validated Result 
+### Linear memory capacity (Jaeger, 2002)
 
+`memory.py` implements `compute_memory_capacity_spectrum`: for each delay k = 1..k_max,
+fits a ridge-regularised linear readout of the network state to reconstruct the input
+u(t-k), evaluated on **held-out test data** (never used for fitting — important for a
+trustworthy estimate, especially as dynamics become richer near/past criticality).
+`total_memory_capacity` sums the spectrum into a single MC(g) value.
 
+### Tying it together: `experiments.py`
 
+`run_gain_sweep` sweeps the gain g, and — for every (seed, gain) combination — measures
+memory capacity, the driven Lyapunov exponent, and the driven perturbation-spreading
+factor **using the exact same shared random input sequence**, removing "different random
+input" as a possible confound when comparing the three curves. `run_network_size_sweep`
+repeats the memory-capacity measurement (only, for speed) across several network sizes,
+for the H4 robustness check. Every `SweepConfig` records all parameters explicitly, and
+`save_sweep_results` / `load_sweep_results` persist results to disk together with the
+exact configuration that produced them.
 
+## Validated results (notebook 02, N=300, 8 seeds unless noted)
 
+| Hypothesis | Finding |
+| H1: MC(g) rises, peaks, falls | Confirmed — peak at g ≈ 1.74, MC_peak ≈ 7.5 |
+| H2: peak at/just before driven g_c | Confirmed — peak ≈0.05–0.07 gain units *below* both driven-criticality estimates (g_c ≈ 1.79–1.81) |
+| H3: short-delay memory outlives long-delay memory as g increases | Confirmed — clear storage-vs-transfer signature |
+| H4: robust across seeds & network size | Confirmed — consistent peak location for N ∈ {100, 200, 300, 500} |
 
 
 
