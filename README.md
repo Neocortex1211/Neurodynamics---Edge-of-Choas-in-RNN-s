@@ -7,14 +7,6 @@ Natschläger, 2004; Legenstein & Maass, 2007; Boedecker et al., 2012; Matzner, 2
 Kanamaru, Hensch & Aihara, 2023), situated within the broader "criticality hypothesis"
 (Kauffman; Langton; reviewed in Roli, Villani, Filisetti & Serra, 2018)
 
-## Status
-
-- [x] **Infrastructure**: network model + three independent criticality estimators
-      (this is what's implemented so far)
-- [ ] Memory capacity measurement
-- [ ] Full parameter sweep: memory capacity vs. gain
-- [ ] Analysis & discussion notebook
-
 ## Setup
 ```bash
 git clone <this-repo-url>
